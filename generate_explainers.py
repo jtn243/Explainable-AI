@@ -9,7 +9,7 @@ import warnings
 pkl_dir = Path.cwd() / "pkls"
 data_dir= Path.cwd() / "data"
 
-btc = pd.read_csv(data_dir /'BTC_pro.csv',index_col=0)
+btc = pd.read_csv(data_dir /'BTC_pro.csv')
 
 feature_descriptions={
         'Open': 'Opening Price',
