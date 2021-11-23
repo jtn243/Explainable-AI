@@ -4,7 +4,7 @@ SHELL := /bin/bash
 all: build
 
 build:
-	      python generate_explainers.py
+	python generate_explainers.py
 
 run:
-	      gunicorn --preload dashboard:app
+	gunicorn --preload dashboard:app
