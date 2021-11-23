@@ -37,7 +37,7 @@ index_app = dash.Dash(
     external_stylesheets=[BOOTSTRAP])
 
 index_app.title = 'explainerdashboard'
-#index_app.layout = index_layout
+index_app.layout = index_layout
 register_callbacks(index_app)
 
 @app.route("/")
