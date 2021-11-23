@@ -8,9 +8,8 @@ import warnings
 
 pkl_dir = Path.cwd() / "pkls"
 
-url =https://raw.githubusercontent.com/jtn243/Expalinable-AI/main/BTC_pro.csv?token=AWTB6PEPSKP7FG5MR3SBSDDBTR4M2
+btc = pd.read_csv('BTC_pro.csv',index_col=0)
 
-btc = pd.read_csv(url)
 feature_descriptions={
         'Open': 'Opening Price',
         'Close': 'Closing Price',
