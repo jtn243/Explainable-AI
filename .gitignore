@@ -101,10 +101,3 @@ venv.bak/
 
 # mkdocs documentation
 /site
-
-# mypy
-.mypy_cache/
-scratch_notebook.ipynb
-scratch_imports.py
-.DS_Store
-#pkls/*
