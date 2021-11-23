@@ -1,5 +1,5 @@
 from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard, ExplainerHub
 # you can override params during load from_config:
-#db = ExplainerDashboard.from_config("dashboard.yaml", title="Awesomer Title")
+db1 = ExplainerDashboard.from_config("dashboard.yaml", title="Awesomer Title")
 
-app = hub.flask_server()
+app = db1.flask_server()
