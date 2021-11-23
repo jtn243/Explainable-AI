@@ -8,7 +8,7 @@ navbar = dbc.NavbarSimple(
     children=[
         dbc.DropdownMenu(
             children=[
-                dbc.DropdownMenuItem("github", href="https://github.com/Shahadate-Rezvy/salmon_explainer"),
+                dbc.DropdownMenuItem("github", href="https://github.com/jtn243/Expalinable-AI"),
             ],
             nav=True,
             in_navbar=True,
@@ -25,8 +25,8 @@ navbar = dbc.NavbarSimple(
         ),
         
     ],
-    brand="Salmon Model Explainer",
-    brand_href="https://github.com/Shahadate-Rezvy/salmon_explainer",
+    brand="Bitcoin Explainer",
+    brand_href="https://github.com/jtn243/Expalinable-AI",
     color="primary",
     dark=True,
     fluid=True,
@@ -79,6 +79,52 @@ clas_explainer.dump(pkl_dir/ "explainer.pkl")
                         ),
                     ],
                     id="clas-code-modal",
+                    size="lg",
+                ),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},
+)
+
+ticket_card = dbc.Card(
+    [
+        dbc.CardBody(
+            [
+                html.H4("Regression Dashboard", className="card-title"),
+                html.P(
+                    "Predicting the fare paid for a ticket on the titanic. "
+                    "Showing the full default dashboard."
+                    ,className="card-text",
+                ),
+                html.A(dbc.Button("Go to dashboard", color="primary"),
+                       href="/regression"),
+                dbc.Button("Show Code", id="reg-code-modal-open", className="mr-1"),
+                dbc.Modal(
+                    [
+                        dbc.ModalHeader("Code needed for this Regression Dashboard"),
+                        dcc.Markdown(
+"""
+```python
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import RegressionExplainer, ExplainerDashboard
+from explainerdashboard.datasets import titanic_fare, feature_descriptions
+X_train, y_train, X_test, y_test = titanic_fare()
+model = RandomForestRegressor(n_estimators=50, max_depth=10).fit(X_train, y_train)
+explainer = RegressionExplainer(model, X_test, y_test, 
+                                cats=['Sex', 'Deck', 'Embarked'], 
+                                descriptions=feature_descriptions,
+                                units="$")
+                               
+ExplainerDashboard(explainer).run()
+```
+"""
+                        ),
+                        dbc.ModalFooter(
+                            dbc.Button("Close", id="reg-code-modal-close", className="ml-auto")
+                        ),
+                    ],
+                    id="reg-code-modal",
                     size="lg",
                 ),
             ]
