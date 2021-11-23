@@ -58,14 +58,17 @@ from explainerdashboard import ClassifierExplainer, RegressionExplainer, Explain
 
 explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,descriptions=feature_descriptions , 
                                   target='Close',units='$')
-_ = ExplainerDashboard(explainer_r)
-explainer_r.dump("explainer_r.joblib")
+
+db = ExplainerDashboard(explainer_r, title='Regression Explainer')
+db.to_yaml("dashboard.yaml", explainerfile="explainer.joblib", dump_explainer=True)
+#_ = ExplainerDashboard(explainer_r)
+#explainer_r.dump("explainer_r.joblib")
 
 
-explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+#explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
                                   target='Trend', labels=['Down','Up'])
-_ = ExplainerDashboard(explainer_c)
-explainer_c.dump("explainer_c.joblib")
+#_ = ExplainerDashboard(explainer_c)
+#explainer_c.dump("explainer_c.joblib")
 
 
 
