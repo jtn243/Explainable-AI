@@ -6,7 +6,7 @@ import datetime
 import math
 import warnings
 
-pkl_dir = Path.cwd() / "pkls"
+#pkl_dir = Path.cwd() / "pkls"
 
 btc = pd.read_csv('BTC_pro.csv',index_col=0)
 
@@ -59,13 +59,13 @@ from explainerdashboard import ClassifierExplainer, RegressionExplainer, Explain
 explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,descriptions=feature_descriptions , 
                                   target='Close',units='$')
 _ = ExplainerDashboard(explainer_r)
-explainer_r.dump(pkl_dir / "explainer_r.joblib")
+explainer_r.dump("explainer_r.joblib")
 
 
 explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
                                   target='Trend', labels=['Down','Up'])
 _ = ExplainerDashboard(explainer_c)
-explainer_c.dump(pkl_dir / "explainer_c.joblib")
+explainer_c.dump("explainer_c.joblib")
 
 
 
