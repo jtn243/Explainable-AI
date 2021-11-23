@@ -133,7 +133,7 @@ ExplainerDashboard(explainer).run()
     style={"width": "18rem"},
 )
 
-default_cards = dbc.CardDeck([salmon_card])
+#default_cards = dbc.CardDeck([salmon_card])
 
 index_layout =  dbc.Container([
     navbar,     
@@ -158,7 +158,7 @@ a custom dashboard.
     
     dbc.Row([
         dbc.Col([
-            default_cards,
+#            default_cards,
         ]),
     ]),
     
@@ -170,6 +170,17 @@ def register_callbacks(app):
         Input("clas-code-modal-open", "n_clicks"), 
         Input("clas-code-modal-close", "n_clicks"),
         State("clas-code-modal", "is_open"),
+    )
+    def toggle_modal(click_open, click_close, is_open):
+        if click_open or click_close:
+            return not is_open
+        return is_open
+    
+ @app.callback(
+        Output("reg-code-modal", "is_open"),
+        Input("reg-code-modal-open", "n_clicks"), 
+        Input("reg-code-modal-close", "n_clicks"),
+        State("reg-code-modal", "is_open"),
     )
     def toggle_modal(click_open, click_close, is_open):
         if click_open or click_close:
