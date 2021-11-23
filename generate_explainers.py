@@ -60,8 +60,7 @@ from explainerdashboard import ClassifierExplainer, RegressionExplainer, Explain
 explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,descriptions=feature_descriptions , 
                                   target='Close',units='$')
 
-db = ExplainerDashboard(explainer_r, title='Regression Explainer')
-db.to_yaml("dashboard.yaml", explainerfile="explainer.joblib", dump_explainer=True)
+#explainer_r = ExplainerDashboard(explainer_r, title='Regression Explainer')
 _ = ExplainerDashboard(explainer_r)
 explainer_r.dump(pkl_dir /"explainer_r.pkl")
 
