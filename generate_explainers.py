@@ -66,7 +66,7 @@ db.to_yaml("dashboard.yaml", explainerfile="explainer.joblib", dump_explainer=Tr
 
 
 #explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
-                                  target='Trend', labels=['Down','Up'])
+#                                  target='Trend', labels=['Down','Up'])
 #_ = ExplainerDashboard(explainer_c)
 #explainer_c.dump("explainer_c.joblib")
 
