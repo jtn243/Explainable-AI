@@ -1,1 +1,1 @@
-web: gunicorn dashboard:app
+web: gunicorn BTC_ED:app
