@@ -34,7 +34,7 @@ navbar = dbc.NavbarSimple(
 
 trend_card = dbc.Card(
     [
-        dbc.CardImg(src="assets/trend.jpg", top=True),
+        dbc.CardImg(src="assets/trend.jpeg", top=True),
         dbc.CardBody(
             [
                 html.H4("Classifier Dashboard", className="card-title"),
