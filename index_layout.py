@@ -16,6 +16,7 @@ navbar = dbc.NavbarSimple(
         ),
         dbc.DropdownMenu(
             children=[
+                dbc.DropdownMenuItem("github", href="https://github.com/oegedijk/explainerdashboard"),
                 dbc.DropdownMenuItem("readthedocs", href="http://explainerdashboard.readthedocs.io/en/latest/"),
                 dbc.DropdownMenuItem("pypi", href="https://pypi.org/project/explainerdashboard/"),
             ],
@@ -25,21 +26,21 @@ navbar = dbc.NavbarSimple(
         ),
         
     ],
-    brand="Bitcoin Explainer",
+    brand="Titanic Explainer",
     brand_href="https://github.com/jtn243/Expalinable-AI",
     color="primary",
     dark=True,
     fluid=True,
 )
 
-salmon_card = dbc.Card(
+trend_card = dbc.Card(
     [
-       
         dbc.CardBody(
             [
                 html.H4("Classifier Dashboard", className="card-title"),
                 html.P(
-                    "Salmon dashboard."
+                    "Predicting the probability of surviving "
+                    "the titanic. Showing the full default dashboard."
                     ,className="card-text",
                 ),
                 html.A(dbc.Button("Go to dashboard", color="primary"),
@@ -51,26 +52,17 @@ salmon_card = dbc.Card(
                         dcc.Markdown(
 """
 ```python
-from pathlib import Path
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
-import pandas as pd
-import numpy as np
 from explainerdashboard import ClassifierExplainer, ExplainerDashboard
-pkl_dir = Path.cwd() / "pkls"
-data_dirz= Path.cwd() / "data"
-df=pd.read_csv(data_dir /'new_processed.csv')
-y=df['JB_category']
-X=df.drop(columns=['JB_category'])
-# classifier
-X_train, y_train, X_test, y_testtrain_test_split(X,y, stratify=y,test_size = 0.1, random_state=0)
-rf = RandomForestClassifier(n_estimators=10, random_state=0,max_depth=5, \
-                            class_weight='balanced').fit(X_train, y_train)
-clas_explainer = ClassifierExplainer(model, X_test, y_test, 
+from explainerdashboard.datasets import titanic_survive, feature_descriptions
+X_train, y_train, X_test, y_test = titanic_survive()
+model = RandomForestClassifier(n_estimators=50, max_depth=10).fit(X_train, y_train)
+explainer = ClassifierExplainer(model, X_test, y_test, 
+                               cats=['Sex', 'Deck', 'Embarked'],
                                descriptions=feature_descriptions,
-                               labels=['HEALTHY', 'UNHEALTHY'])
-_ = ExplainerDashboard(clas_explainer)
-clas_explainer.dump(pkl_dir/ "explainer.pkl")
+                               labels=['Not survived', 'Survived'])
+                               
+ExplainerDashboard(explainer).run()
 ```
 """
                         ),
@@ -87,7 +79,7 @@ clas_explainer.dump(pkl_dir/ "explainer.pkl")
     style={"width": "18rem"},
 )
 
-ticket_card = dbc.Card(
+price_card = dbc.Card(
     [
         dbc.CardBody(
             [
@@ -133,7 +125,8 @@ ExplainerDashboard(explainer).run()
     style={"width": "18rem"},
 )
 
-#default_cards = dbc.CardDeck([salmon_card])
+default_cards = dbc.CardDeck([trend_card, price_card])
+#custom_cards = dbc.CardDeck([simple_survive_card, simple_ticket_card, custom_card])
 
 index_layout =  dbc.Container([
     navbar,     
@@ -158,7 +151,7 @@ a custom dashboard.
     
     dbc.Row([
         dbc.Col([
-#            default_cards,
+            default_cards,
         ]),
     ]),
     
@@ -175,8 +168,8 @@ def register_callbacks(app):
         if click_open or click_close:
             return not is_open
         return is_open
-    
- @app.callback(
+
+    @app.callback(
         Output("reg-code-modal", "is_open"),
         Input("reg-code-modal-open", "n_clicks"), 
         Input("reg-code-modal-close", "n_clicks"),
