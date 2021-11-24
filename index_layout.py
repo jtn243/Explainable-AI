@@ -16,7 +16,6 @@ navbar = dbc.NavbarSimple(
         ),
         dbc.DropdownMenu(
             children=[
-                dbc.DropdownMenuItem("github", href="https://github.com/oegedijk/explainerdashboard"),
                 dbc.DropdownMenuItem("readthedocs", href="http://explainerdashboard.readthedocs.io/en/latest/"),
                 dbc.DropdownMenuItem("pypi", href="https://pypi.org/project/explainerdashboard/"),
             ],
@@ -154,8 +153,7 @@ a custom dashboard.
             default_cards,
         ]),
     ]),
-    
-    ])
+])
 
 def register_callbacks(app):
     @app.callback(
