@@ -18,13 +18,13 @@ pkl_dir = Path.cwd() / "pkls"
 
 app = Flask(__name__)
 
-explainer_c = ClassifierExplainer.from_file(pkl_dir / "explainer_c.pkl")
+explainer_c = ClassifierExplainer.from_file(pkl_dir / "explainer_c.joblib")
 clas_dashboard = ExplainerDashboard(explainer_c, 
                     title="Classifier Explainer: Predicting survival on the Titanic", 
                     server=app, url_base_pathname="/classifier/", 
                     header_hide_selector=True)
 
-explainer_r = RegressionExplainer.from_file(pkl_dir / "explainer_r.pkl")
+explainer_r = RegressionExplainer.from_file(pkl_dir / "explainer_r.joblib")
 reg_dashboard = ExplainerDashboard(explainer_r, 
                     title="Regression Explainer: Predicting ticket fare",
                     server=app, url_base_pathname="/regression/")
