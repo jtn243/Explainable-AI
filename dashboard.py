@@ -8,7 +8,7 @@ from pathlib import Path
 from flask import Flask
 
 import dash
-#from dash_bootstrap_components.themes import FLATLY, BOOTSTRAP # bootstrap theme
+from dash_bootstrap_components.themes import FLATLY, BOOTSTRAP # bootstrap theme
 from explainerdashboard import *
 
 from index_layout import index_layout, register_callbacks
@@ -18,13 +18,13 @@ pkl_dir = Path.cwd() / "pkls"
 
 app = Flask(__name__)
 
-explainer_c = ClassifierExplainer.from_file(pkl_dir / "explainer_c.pkl")
+explainer_c = ClassifierExplainer.from_file(pkl_dir / "explainer_c.pkl", 'rb')
 clas_dashboard = ExplainerDashboard(explainer_c, 
                     title="Classifier Explainer: Predicting survival on the Titanic", 
                     server=app, url_base_pathname="/classifier/", 
                     header_hide_selector=True)
 
-explainer_r = RegressionExplainer.from_file(pkl_dir / "explainer_r.pkl")
+explainer_r = RegressionExplainer.from_file(pkl_dir / "explainer_r.pkl", 'rb')
 reg_dashboard = ExplainerDashboard(explainer_r, 
                     title="Regression Explainer: Predicting ticket fare",
                     server=app, url_base_pathname="/regression/")
@@ -32,8 +32,8 @@ reg_dashboard = ExplainerDashboard(explainer_r,
 index_app = dash.Dash(
     __name__, 
     server=app, 
-    url_base_pathname="/") 
-#    external_stylesheets=[BOOTSTRAP])
+    url_base_pathname="/", 
+    external_stylesheets=[BOOTSTRAP])
 
 index_app.title = 'explainerdashboard'
 index_app.layout = index_layout
