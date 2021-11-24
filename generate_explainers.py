@@ -5,6 +5,7 @@ import seaborn as sns
 import datetime
 import math
 import warnings
+from pathlib import Path
 
 pkl_dir = Path.cwd() / "pkls"
 data_dir= Path.cwd() / "data"
@@ -69,6 +70,3 @@ explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,desc
                                   target='Trend', labels=['Down','Up'])
 _ = ExplainerDashboard(explainer_c)
 explainer_c.dump(pkl_dir /"explainer_c.pkl")
-
-
-
