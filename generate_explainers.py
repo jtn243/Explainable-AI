@@ -54,10 +54,10 @@ explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,
 
 #explainer_r = ExplainerDashboard(explainer_r, title='Regression Explainer')
 _ = ExplainerDashboard(explainer_r)
-explainer_r.dump(pkl_dir /"explainer_r.pkl")
+explainer_r.dump(pkl_dir /"explainer_r.joblib")
 
 
 explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
                                   target='Trend', labels=['Down','Up'])
 _ = ExplainerDashboard(explainer_c)
-explainer_c.dump(pkl_dir /"explainer_c.pkl")
+explainer_c.dump(pkl_dir /"explainer_c.joblib")
