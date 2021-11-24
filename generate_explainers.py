@@ -1,5 +1,10 @@
 import pandas as pd
 from pathlib import Path
+from imblearn.over_sampling import SMOTE
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
 
 pkl_dir = Path.cwd() / "pkls"
 data_dir= Path.cwd() / "data"
@@ -25,11 +30,9 @@ X_test= X.iloc[len(X)-30: , :]
 y_train = y.iloc[0:len(X)-30]
 y_test = y.iloc[len(X)-30:]
 
-from imblearn.over_sampling import SMOTE
 oversample = SMOTE()
 X_train,y_train = oversample.fit_resample(X_train,y_train)
 
-from sklearn.ensemble import RandomForestClassifier
 rfc = RandomForestClassifier()
 rfc.fit(X_train,y_train)
 rfc_pred = rfc.predict(X_test)
@@ -42,13 +45,9 @@ Xr_test= Xr.iloc[len(X)-30: , :]
 yr_train = yr.iloc[0:len(X)-30]
 yr_test = yr.iloc[len(X)-30:]
 
-from sklearn.ensemble import RandomForestRegressor
 rfr = RandomForestRegressor()
 rfr.fit(Xr_train,yr_train)
 rfr_pred = rfr.predict(Xr_test)
-
-from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
-
 
 explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,descriptions=feature_descriptions , 
                                   target='Close',units='$')
