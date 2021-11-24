@@ -20,13 +20,13 @@ app = Flask(__name__)
 
 explainer_c = ClassifierExplainer.from_file(pkl_dir / "explainer_c.joblib")
 clas_dashboard = ExplainerDashboard(explainer_c, 
-                    title="Classifier Explainer: Predicting survival on the Titanic", 
+                    title="Classifier Explainer: Trend Price Prediction", 
                     server=app, url_base_pathname="/classifier/", 
                     header_hide_selector=True)
 
 explainer_r = RegressionExplainer.from_file(pkl_dir / "explainer_r.joblib")
 reg_dashboard = ExplainerDashboard(explainer_r, 
-                    title="Regression Explainer: Predicting ticket fare",
+                    title="Regression Explainer: Close Price Prediction",
                     server=app, url_base_pathname="/regression/")
 
 index_app = dash.Dash(
@@ -35,7 +35,7 @@ index_app = dash.Dash(
     url_base_pathname="/", 
     external_stylesheets=[BOOTSTRAP])
 
-index_app.title = 'explainerdashboard'
+index_app.title = 'Bitcoin'
 index_app.layout = index_layout
 register_callbacks(index_app)
 
