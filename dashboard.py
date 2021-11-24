@@ -8,7 +8,7 @@ from pathlib import Path
 from flask import Flask
 
 import dash
-from dash_bootstrap_components.themes import FLATLY, BOOTSTRAP # bootstrap theme
+#from dash_bootstrap_components.themes import FLATLY, BOOTSTRAP # bootstrap theme
 from explainerdashboard import *
 
 from index_layout import index_layout, register_callbacks
@@ -32,8 +32,8 @@ reg_dashboard = ExplainerDashboard(explainer_r,
 index_app = dash.Dash(
     __name__, 
     server=app, 
-    url_base_pathname="/", 
-    external_stylesheets=[BOOTSTRAP])
+    url_base_pathname="/") 
+#    external_stylesheets=[BOOTSTRAP])
 
 index_app.title = 'explainerdashboard'
 index_app.layout = index_layout
