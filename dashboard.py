@@ -27,8 +27,7 @@ clas_dashboard = ExplainerDashboard(explainer_c,
 explainer_r = RegressionExplainer.from_file(pkl_dir / "explainer_r.pkl")
 reg_dashboard = ExplainerDashboard(explainer_r, 
                     title="Regression Explainer: Predicting ticket fare",
-                    server=app, url_base_pathname="/regression/",
-                                  header_hide_selector=True)
+                    server=app, url_base_pathname="/regression/")
 
 index_app = dash.Dash(
     __name__, 
