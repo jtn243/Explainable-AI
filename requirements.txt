@@ -10,5 +10,4 @@ numpy
 seaborn
 matplotlib
 datetime
-math
 warnings
