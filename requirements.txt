@@ -9,3 +9,4 @@ imblearn
 numpy
 seaborn
 matplotlib
+dash-bootstrap-components<1
