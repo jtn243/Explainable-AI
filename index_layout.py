@@ -25,7 +25,7 @@ navbar = dbc.NavbarSimple(
         ),
         
     ],
-    brand="Titanic Explainer",
+    brand="Cryptocurrency Expalinable-AI",
     brand_href="https://github.com/jtn243/Expalinable-AI",
     color="primary",
     dark=True,
@@ -34,12 +34,12 @@ navbar = dbc.NavbarSimple(
 
 trend_card = dbc.Card(
     [
+        dbc.CardImg(src="assets/trend.jpeg", top=True),
         dbc.CardBody(
             [
                 html.H4("Classifier Dashboard", className="card-title"),
                 html.P(
-                    "Predicting the probability of surviving "
-                    "the titanic. Showing the full default dashboard."
+                    "Predicting the Trend of Bitcoin for last 30 Days"
                     ,className="card-text",
                 ),
                 html.A(dbc.Button("Go to dashboard", color="primary"),
@@ -51,17 +51,48 @@ trend_card = dbc.Card(
                         dcc.Markdown(
 """
 ```python
-from sklearn.ensemble import RandomForestClassifier
-from explainerdashboard import ClassifierExplainer, ExplainerDashboard
-from explainerdashboard.datasets import titanic_survive, feature_descriptions
-X_train, y_train, X_test, y_test = titanic_survive()
-model = RandomForestClassifier(n_estimators=50, max_depth=10).fit(X_train, y_train)
-explainer = ClassifierExplainer(model, X_test, y_test, 
-                               cats=['Sex', 'Deck', 'Embarked'],
-                               descriptions=feature_descriptions,
-                               labels=['Not survived', 'Survived'])
-                               
-ExplainerDashboard(explainer).run()
+import pandas as pd
+from pathlib import Path
+from imblearn.over_sampling import SMOTE
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
+
+pkl_dir = Path.cwd() / "pkls"
+data_dir= Path.cwd() / "data"
+
+btc = pd.read_csv(data_dir /'BTC_pro.csv', index_col=0)
+
+feature_descriptions={
+        'Open': 'Opening Price',
+        'Close': 'Closing Price',
+        'Low': 'Lowest Price',
+        'High': 'Highest Price',
+        'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
+        'Market Cap': "The total market value of a cryptocurrency's circulating supply",
+        'Return' : 'Return on the Single Day',
+        'Cum_Return':'Cummulative Return',
+        'Trend': 'Up or Down'}
+
+X = btc.drop(columns=['Trend','Return'], axis=1)
+y = btc['Trend']
+
+X_train = X.iloc[0:len(X)-30, :]
+X_test= X.iloc[len(X)-30: , :]
+y_train = y.iloc[0:len(X)-30]
+y_test = y.iloc[len(X)-30:]
+
+oversample = SMOTE()
+X_train,y_train = oversample.fit_resample(X_train,y_train)
+
+rfc = RandomForestClassifier()
+rfc.fit(X_train,y_train)
+rfc_pred = rfc.predict(X_test)
+
+explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+                                  target='Trend', labels=['Down','Up'])
+_ = ExplainerDashboard(explainer_c)
+explainer_c.dump(pkl_dir /"explainer_c.joblib")
 ```
 """
                         ),
@@ -80,12 +111,12 @@ ExplainerDashboard(explainer).run()
 
 price_card = dbc.Card(
     [
+        dbc.CardImg(src="assets/price.jpeg", top=True),
         dbc.CardBody(
             [
                 html.H4("Regression Dashboard", className="card-title"),
                 html.P(
-                    "Predicting the fare paid for a ticket on the titanic. "
-                    "Showing the full default dashboard."
+                    "Predicting the Close Price of Bitcoin for last 30 Days"
                     ,className="card-text",
                 ),
                 html.A(dbc.Button("Go to dashboard", color="primary"),
@@ -97,17 +128,45 @@ price_card = dbc.Card(
                         dcc.Markdown(
 """
 ```python
+import pandas as pd
+from pathlib import Path
 from sklearn.ensemble import RandomForestRegressor
-from explainerdashboard import RegressionExplainer, ExplainerDashboard
-from explainerdashboard.datasets import titanic_fare, feature_descriptions
-X_train, y_train, X_test, y_test = titanic_fare()
-model = RandomForestRegressor(n_estimators=50, max_depth=10).fit(X_train, y_train)
-explainer = RegressionExplainer(model, X_test, y_test, 
-                                cats=['Sex', 'Deck', 'Embarked'], 
-                                descriptions=feature_descriptions,
-                                units="$")
-                               
-ExplainerDashboard(explainer).run()
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
+
+pkl_dir = Path.cwd() / "pkls"
+data_dir= Path.cwd() / "data"
+
+btc = pd.read_csv(data_dir /'BTC_pro.csv', index_col=0)
+
+feature_descriptions={
+        'Open': 'Opening Price',
+        'Close': 'Closing Price',
+        'Low': 'Lowest Price',
+        'High': 'Highest Price',
+        'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
+        'Market Cap': "The total market value of a cryptocurrency's circulating supply",
+        'Return' : 'Return on the Single Day',
+        'Cum_Return':'Cummulative Return',
+        'Trend': 'Up or Down'}
+
+Xr = btc.drop(columns=['Trend','Close','Cum_Return'], axis=1)
+yr = btc['Close']
+
+Xr_train = Xr.iloc[0:len(X)-30, :]
+Xr_test= Xr.iloc[len(X)-30: , :]
+yr_train = yr.iloc[0:len(X)-30]
+yr_test = yr.iloc[len(X)-30:]
+
+rfr = RandomForestRegressor()
+rfr.fit(Xr_train,yr_train)
+rfr_pred = rfr.predict(Xr_test)
+
+explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,descriptions=feature_descriptions , 
+                                  target='Close',units='$')
+
+_ = ExplainerDashboard(explainer_r)
+explainer_r.dump(pkl_dir /"explainer_r.joblib")
 ```
 """
                         ),
@@ -125,8 +184,6 @@ ExplainerDashboard(explainer).run()
 )
 
 default_cards = dbc.CardDeck([trend_card, price_card])
-#custom_cards = dbc.CardDeck([simple_survive_card, simple_ticket_card, custom_card])
-
 index_layout =  dbc.Container([
     navbar,     
     dbc.Row([
@@ -139,11 +196,9 @@ index_layout =  dbc.Container([
     
     dbc.Row([
         dbc.Col([
-            html.H3("Examples"),
+            html.H3("Bitcoin"),
             dcc.Markdown("""
-Below you can find demonstrations of the three default dashboards for classification, 
-regression and multi class classification problems, plus one demonstration of 
-a custom dashboard.
+
 """),
         ])
     ]),
