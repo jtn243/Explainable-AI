@@ -1,7 +1,4 @@
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 from pathlib import Path
 
 pkl_dir = Path.cwd() / "pkls"
@@ -33,8 +30,6 @@ oversample = SMOTE()
 X_train,y_train = oversample.fit_resample(X_train,y_train)
 
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, roc_curve
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 rfc = RandomForestClassifier()
 rfc.fit(X_train,y_train)
 rfc_pred = rfc.predict(X_test)
@@ -52,7 +47,7 @@ rfr = RandomForestRegressor()
 rfr.fit(Xr_train,yr_train)
 rfr_pred = rfr.predict(Xr_test)
 
-from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard, ExplainerHub
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
 
 
 explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,descriptions=feature_descriptions , 
