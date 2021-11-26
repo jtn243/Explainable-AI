@@ -32,13 +32,13 @@ reg_dashboard = ExplainerDashboard(explainer_r,
 explainer_ceth = ClassifierExplainer.from_file(pkl_dir / "explainer_ceth.joblib")
 cleth_dashboard = ExplainerDashboard(explainer_ceth, 
                     title="Classifier Explainer: Trend Prediction", 
-                    server=app, url_base_pathname="/classifier/", 
+                    server=app, url_base_pathname="/eth_classifier/", 
                     header_hide_selector=True)
 
 explainer_reth = RegressionExplainer.from_file(pkl_dir / "explainer_reth.joblib")
 rgeth_dashboard = ExplainerDashboard(explainer_r, 
                     title="Regression Explainer: Close Price Prediction",
-                    server=app, url_base_pathname="/regression/")
+                    server=app, url_base_pathname="/eth_regression/")
 
 
 index_app = dash.Dash(
