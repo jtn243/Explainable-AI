@@ -207,7 +207,7 @@ etht_card = dbc.Card(
                             dbc.Button("Close", id="cleth-code-modal-close", className="ml-auto")
                         ),
                     ],
-                    id="clas-code-modal",
+                    id="cleth-code-modal",
                     size="lg",
                 ),
             ]
@@ -239,7 +239,7 @@ ethp_card = dbc.Card(
                             dbc.Button("Close", id="rgeth-code-modal-close", className="ml-auto")
                         ),
                     ],
-                    id="reg-code-modal",
+                    id="rgeth-code-modal",
                     size="lg",
                 ),
             ]
