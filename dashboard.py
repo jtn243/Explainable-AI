@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 explainer_c = ClassifierExplainer.from_file(pkl_dir / "explainer_c.joblib")
 clas_dashboard = ExplainerDashboard(explainer_c, 
-                    title="Classifier Explainer: Trend Price Prediction", 
+                    title="Classifier Explainer: Trend Prediction", 
                     server=app, url_base_pathname="/classifier/", 
                     header_hide_selector=True)
 
@@ -28,6 +28,18 @@ explainer_r = RegressionExplainer.from_file(pkl_dir / "explainer_r.joblib")
 reg_dashboard = ExplainerDashboard(explainer_r, 
                     title="Regression Explainer: Close Price Prediction",
                     server=app, url_base_pathname="/regression/")
+
+explainer_ceth = ClassifierExplainer.from_file(pkl_dir / "explainer_ceth.joblib")
+cleth_dashboard = ExplainerDashboard(explainer_ceth, 
+                    title="Classifier Explainer: Trend Prediction", 
+                    server=app, url_base_pathname="/classifier/", 
+                    header_hide_selector=True)
+
+explainer_reth = RegressionExplainer.from_file(pkl_dir / "explainer_reth.joblib")
+rgeth_dashboard = ExplainerDashboard(explainer_r, 
+                    title="Regression Explainer: Close Price Prediction",
+                    server=app, url_base_pathname="/regression/")
+
 
 index_app = dash.Dash(
     __name__, 
@@ -50,3 +62,11 @@ def classifier_dashboard():
 @app.route('/regression')
 def regression_dashboard():
     return reg_dashboard.app.index()
+  
+@app.route('/classifier')
+def classifier_dashboard():
+    return cleth_dashboard.app.index()
+
+@app.route('/regression')
+def regression_dashboard():
+    return rgeth_dashboard.app.index()
