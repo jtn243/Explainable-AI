@@ -36,7 +36,7 @@ cleth_dashboard = ExplainerDashboard(explainer_ceth,
                     header_hide_selector=True)
 
 explainer_reth = RegressionExplainer.from_file(pkl_dir / "explainer_reth.joblib")
-rgeth_dashboard = ExplainerDashboard(explainer_r, 
+rgeth_dashboard = ExplainerDashboard(explainer_reth, 
                     title="Regression Explainer: Close Price Prediction",
                     server=app, url_base_pathname="/eth_regression/")
 
