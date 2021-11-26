@@ -195,7 +195,7 @@ etht_card = dbc.Card(
                 ),
                 html.A(dbc.Button("Go to dashboard", color="primary"),
                        href="/classifier"),
-                dbc.Button("Show Code", id="clas-code-modal-open", className="mr-1"),
+                dbc.Button("Show Code", id="cleth-code-modal-open", className="mr-1"),
                 dbc.Modal(
                     [
                         dbc.ModalHeader("Code needed for this Classifier Dashboard"),
@@ -204,7 +204,7 @@ etht_card = dbc.Card(
 """
                         ),
                         dbc.ModalFooter(
-                            dbc.Button("Close", id="clas-code-modal-close", className="ml-auto")
+                            dbc.Button("Close", id="cleth-code-modal-close", className="ml-auto")
                         ),
                     ],
                     id="clas-code-modal",
@@ -227,7 +227,7 @@ ethp_card = dbc.Card(
                 ),
                 html.A(dbc.Button("Go to dashboard", color="primary"),
                        href="/regression"),
-                dbc.Button("Show Code", id="reg-code-modal-open", className="mr-1"),
+                dbc.Button("Show Code", id="rgeth-code-modal-open", className="mr-1"),
                 dbc.Modal(
                     [
                         dbc.ModalHeader("Code needed for this Regression Dashboard"),
@@ -236,7 +236,7 @@ ethp_card = dbc.Card(
 """
                         ),
                         dbc.ModalFooter(
-                            dbc.Button("Close", id="reg-code-modal-close", className="ml-auto")
+                            dbc.Button("Close", id="rgeth-code-modal-close", className="ml-auto")
                         ),
                     ],
                     id="reg-code-modal",
@@ -299,10 +299,10 @@ def register_callbacks(app):
         return is_open
     
     @app.callback(
-        Output("clas-code-modal", "is_open"),
-        Input("clas-code-modal-open", "n_clicks"), 
-        Input("clas-code-modal-close", "n_clicks"),
-        State("clas-code-modal", "is_open"),
+        Output("cleth-code-modal", "is_open"),
+        Input("cleth-code-modal-open", "n_clicks"), 
+        Input("cleth-code-modal-close", "n_clicks"),
+        State("cleth-code-modal", "is_open"),
     )
     def toggle_modal(click_open, click_close, is_open):
         if click_open or click_close:
@@ -310,10 +310,10 @@ def register_callbacks(app):
         return is_open
 
     @app.callback(
-        Output("reg-code-modal", "is_open"),
-        Input("reg-code-modal-open", "n_clicks"), 
-        Input("reg-code-modal-close", "n_clicks"),
-        State("reg-code-modal", "is_open"),
+        Output("rgeth-code-modal", "is_open"),
+        Input("rgeth-code-modal-open", "n_clicks"), 
+        Input("rgeth-code-modal-close", "n_clicks"),
+        State("rgeth-code-modal", "is_open"),
     )
     def toggle_modal(click_open, click_close, is_open):
         if click_open or click_close:
