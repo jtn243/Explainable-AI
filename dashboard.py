@@ -63,10 +63,10 @@ def classifier_dashboard():
 def regression_dashboard():
     return reg_dashboard.app.index()
   
-@app.route('/classifier')
-def classifier_dashboard():
+@app.route('/eth_classifier')
+def cleth_dashboard():
     return cleth_dashboard.app.index()
 
-@app.route('/regression')
-def regression_dashboard():
+@app.route('/eth_regression')
+def rgeth_dashboard():
     return rgeth_dashboard.app.index()
