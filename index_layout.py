@@ -445,7 +445,13 @@ xrpp_card = dbc.Card(
 
 
 
-default_cards = dbc.CardDeck([trend_card, price_card, etht_card, ethp_card, adat_card, adap_card, bnbt_card, bnbp_card, xrpt_card, xrpp_card])
+btc_cards = dbc.CardDeck([trend_card, price_card])
+eth_cards = dbc.CardDeck([etht_card, ethp_card])
+ada_cards = dbc.CardDeck([adat_card, adap_card])
+bnb_cards = dbc.CardDeck([bnbt_card, bnbp_card])
+xrp_cards = dbc.CardDeck([xrpt_card, xrpp_card])
+
+
 index_layout =  dbc.Container([
     navbar,     
     dbc.Row([
@@ -467,27 +473,27 @@ index_layout =  dbc.Container([
     
     dbc.Row([
         dbc.Col([
-            default_cards[:2],
+            btc_cards,
         ]),
     ]),
     dbc.Row([
         dbc.Col([
-            default_cards[2:4],
+            eth_cards,
         ]),
     ]),
     dbc.Row([
         dbc.Col([
-            default_cards[4:6],
+            ada_cards,
         ]),
     ]),
     dbc.Row([
         dbc.Col([
-            default_cards[6:8],
+            bnb_cards,
         ]),
     ]),
     dbc.Row([
         dbc.Col([
-            default_cards[8:],
+            xrp_cards,
         ]),
     ]),
 ])
