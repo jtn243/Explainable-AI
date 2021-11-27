@@ -467,7 +467,27 @@ index_layout =  dbc.Container([
     
     dbc.Row([
         dbc.Col([
-            default_cards,
+            default_cards[:2],
+        ]),
+    ]),
+    dbc.Row([
+        dbc.Col([
+            default_cards[2:4],
+        ]),
+    ]),
+    dbc.Row([
+        dbc.Col([
+            default_cards[4:6],
+        ]),
+    ]),
+    dbc.Row([
+        dbc.Col([
+            default_cards[6:8],
+        ]),
+    ]),
+    dbc.Row([
+        dbc.Col([
+            default_cards[8:],
         ]),
     ]),
 ])
