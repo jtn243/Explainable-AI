@@ -183,7 +183,72 @@ explainer_r.dump(pkl_dir /"explainer_r.joblib")
     style={"width": "18rem"},
 )
 
-default_cards = dbc.CardDeck([trend_card, price_card])
+etht_card = dbc.Card(
+    [
+
+        dbc.CardBody(
+            [
+                html.H4("Classifier Dashboard", className="card-title"),
+                html.P(
+                    "Predicting the Trend of ETH for last 30 Days"
+                    ,className="card-text",
+                ),
+                html.A(dbc.Button("Go to dashboard", color="primary"),
+                       href="/eth_classifier"),
+                dbc.Button("Show Code", id="cleth-code-modal-open", className="mr-1"),
+                dbc.Modal(
+                    [
+                        dbc.ModalHeader("Code needed for this Classifier Dashboard"),
+                        dcc.Markdown(
+"""
+"""
+                        ),
+                        dbc.ModalFooter(
+                            dbc.Button("Close", id="cleth-code-modal-close", className="ml-auto")
+                        ),
+                    ],
+                    id="cleth-code-modal",
+                    size="lg",
+                ),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},
+)
+
+ethp_card = dbc.Card(
+    [
+        dbc.CardBody(
+            [
+                html.H4("Regression Dashboard", className="card-title"),
+                html.P(
+                    "Predicting the Close Price of ETH for last 30 Days"
+                    ,className="card-text",
+                ),
+                html.A(dbc.Button("Go to dashboard", color="primary"),
+                       href="/eth_regression"),
+                dbc.Button("Show Code", id="rgeth-code-modal-open", className="mr-1"),
+                dbc.Modal(
+                    [
+                        dbc.ModalHeader("Code needed for this Regression Dashboard"),
+                        dcc.Markdown(
+"""
+"""
+                        ),
+                        dbc.ModalFooter(
+                            dbc.Button("Close", id="rgeth-code-modal-close", className="ml-auto")
+                        ),
+                    ],
+                    id="rgeth-code-modal",
+                    size="lg",
+                ),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},
+)
+
+default_cards = dbc.CardDeck([trend_card, price_card, etht_card, ethp_card])
 index_layout =  dbc.Container([
     navbar,     
     dbc.Row([
@@ -232,3 +297,27 @@ def register_callbacks(app):
         if click_open or click_close:
             return not is_open
         return is_open
+    
+    @app.callback(
+        Output("cleth-code-modal", "is_open"),
+        Input("cleth-code-modal-open", "n_clicks"), 
+        Input("cleth-code-modal-close", "n_clicks"),
+        State("cleth-code-modal", "is_open"),
+    )
+    def toggle_modal(click_open, click_close, is_open):
+        if click_open or click_close:
+            return not is_open
+        return is_open
+
+    @app.callback(
+        Output("rgeth-code-modal", "is_open"),
+        Input("rgeth-code-modal-open", "n_clicks"), 
+        Input("rgeth-code-modal-close", "n_clicks"),
+        State("rgeth-code-modal", "is_open"),
+    )
+    def toggle_modal(click_open, click_close, is_open):
+        if click_open or click_close:
+            return not is_open
+        return is_open
+    
+    
