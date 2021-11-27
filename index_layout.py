@@ -476,11 +476,22 @@ index_layout =  dbc.Container([
             btc_cards,
         ]),
     ]),
+    
+    dbc.Row([
+        dbc.Col([
+            html.H3("Ethereum"),
+            dcc.Markdown("""
+"""),
+        ])
+    ]),
+    
     dbc.Row([
         dbc.Col([
             eth_cards,
         ]),
     ]),
+    
+    
     dbc.Row([
         dbc.Col([
             ada_cards,
