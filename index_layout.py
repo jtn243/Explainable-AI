@@ -445,7 +445,7 @@ xrpp_card = dbc.Card(
 
 
 
-default_cards = dbc.CardDeck([trend_card, price_card, etht_card, ethp_card, adat_card, adap_card])
+default_cards = dbc.CardDeck([trend_card, price_card, etht_card, ethp_card, adat_card, adap_card, bnbt_card, bnbp_card, xrpt_card, xrpp_card])
 index_layout =  dbc.Container([
     navbar,     
     dbc.Row([
