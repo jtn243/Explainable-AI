@@ -40,6 +40,17 @@ rgeth_dashboard = ExplainerDashboard(explainer_reth,
                     title="Regression Explainer: Close Price Prediction",
                     server=app, url_base_pathname="/eth_regression/")
 
+explainer_cada = ClassifierExplainer.from_file(pkl_dir / "explainer_cada.joblib")
+clada_dashboard = ExplainerDashboard(explainer_cada, 
+                    title="Classifier Explainer: Trend Prediction", 
+                    server=app, url_base_pathname="/ada_classifier/", 
+                    header_hide_selector=True)
+
+explainer_rada = RegressionExplainer.from_file(pkl_dir / "explainer_rada.joblib")
+rgada_dashboard = ExplainerDashboard(explainer_rada, 
+                    title="Regression Explainer: Close Price Prediction",
+                    server=app, url_base_pathname="/ada_regression/")
+
 
 index_app = dash.Dash(
     __name__, 
@@ -70,3 +81,11 @@ def cleth_dashboard():
 @app.route('/eth_regression')
 def rgeth_dashboard():
     return rgeth_dashboard.app.index()
+  
+@app.route('/ada_classifier')
+def clada_dashboard():
+    return clada_dashboard.app.index()
+
+@app.route('/ada_regression')
+def rgada_dashboard():
+    return rgada_dashboard.app.index()
