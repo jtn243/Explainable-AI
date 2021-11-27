@@ -194,7 +194,7 @@ etht_card = dbc.Card(
                     ,className="card-text",
                 ),
                 html.A(dbc.Button("Go to dashboard", color="primary"),
-                       href="/classifier"),
+                       href="/eth_classifier"),
                 dbc.Button("Show Code", id="cleth-code-modal-open", className="mr-1"),
                 dbc.Modal(
                     [
@@ -226,7 +226,7 @@ ethp_card = dbc.Card(
                     ,className="card-text",
                 ),
                 html.A(dbc.Button("Go to dashboard", color="primary"),
-                       href="/regression"),
+                       href="/eth_regression"),
                 dbc.Button("Show Code", id="rgeth-code-modal-open", className="mr-1"),
                 dbc.Modal(
                     [
