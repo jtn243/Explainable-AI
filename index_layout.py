@@ -480,8 +480,6 @@ index_layout =  dbc.Container([
     dbc.Row([
         dbc.Col([
             html.H3("Ethereum"),
-            dcc.Markdown("""
-"""),
         ])
     ]),
     
@@ -491,17 +489,36 @@ index_layout =  dbc.Container([
         ]),
     ]),
     
+    dbc.Row([
+        dbc.Col([
+            html.H3("Cardano"),
+        ])
+    ]),
     
     dbc.Row([
         dbc.Col([
             ada_cards,
         ]),
     ]),
+    
+    dbc.Row([
+        dbc.Col([
+            html.H3("Binance Coin"),
+        ])
+    ]),
+    
     dbc.Row([
         dbc.Col([
             bnb_cards,
         ]),
     ]),
+    
+    dbc.Row([
+        dbc.Col([
+            html.H3("XRP"),
+        ])
+    ]),
+    
     dbc.Row([
         dbc.Col([
             xrp_cards,
