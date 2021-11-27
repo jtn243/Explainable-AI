@@ -51,6 +51,28 @@ rgada_dashboard = ExplainerDashboard(explainer_rada,
                     title="Regression Explainer: Close Price Prediction",
                     server=app, url_base_pathname="/ada_regression/")
 
+explainer_cbnb = ClassifierExplainer.from_file(pkl_dir / "explainer_cbnb.joblib")
+clbnb_dashboard = ExplainerDashboard(explainer_cbnb, 
+                    title="Classifier Explainer: Trend Prediction", 
+                    server=app, url_base_pathname="/bnb_classifier/", 
+                    header_hide_selector=True)
+
+explainer_rbnb = RegressionExplainer.from_file(pkl_dir / "explainer_rbnb.joblib")
+rgbnb_dashboard = ExplainerDashboard(explainer_rbnb, 
+                    title="Regression Explainer: Close Price Prediction",
+                    server=app, url_base_pathname="/bnb_regression/")
+
+explainer_cxrp = ClassifierExplainer.from_file(pkl_dir / "explainer_cxrp.joblib")
+clxrp_dashboard = ExplainerDashboard(explainer_cxrp, 
+                    title="Classifier Explainer: Trend Prediction", 
+                    server=app, url_base_pathname="/xrp_classifier/", 
+                    header_hide_selector=True)
+
+explainer_rxrp = RegressionExplainer.from_file(pkl_dir / "explainer_rxrp.joblib")
+rgxrp_dashboard = ExplainerDashboard(explainer_rxrp, 
+                    title="Regression Explainer: Close Price Prediction",
+                    server=app, url_base_pathname="/xrp_regression/")
+
 
 index_app = dash.Dash(
     __name__, 
@@ -89,3 +111,19 @@ def clada_dashboard():
 @app.route('/ada_regression')
 def rgada_dashboard():
     return rgada_dashboard.app.index()
+  
+@app.route('/bnb_classifier')
+def clbnb_dashboard():
+    return clbnb_dashboard.app.index()
+
+@app.route('/bnb_regression')
+def rgbnb_dashboard():
+    return rgbnb_dashboard.app.index()
+  
+@app.route('/xrp_classifier')
+def clxrp_dashboard():
+    return clxrp_dashboard.app.index()
+
+@app.route('/xrp_regression')
+def rgxrp_dashboard():
+    return rgxrp_dashboard.app.index()
