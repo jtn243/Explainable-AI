@@ -248,7 +248,210 @@ ethp_card = dbc.Card(
     style={"width": "18rem"},
 )
 
-default_cards = dbc.CardDeck([trend_card, price_card, etht_card, ethp_card])
+adat_card = dbc.Card(
+    [
+
+        dbc.CardBody(
+            [
+                html.H4("Classifier Dashboard", className="card-title"),
+                html.P(
+                    "Predicting the Trend of ADA for last 30 Days"
+                    ,className="card-text",
+                ),
+                html.A(dbc.Button("Go to dashboard", color="primary"),
+                       href="/ada_classifier"),
+                dbc.Button("Show Code", id="clada-code-modal-open", className="mr-1"),
+                dbc.Modal(
+                    [
+                        dbc.ModalHeader("Code needed for this Classifier Dashboard"),
+                        dcc.Markdown(
+"""
+"""
+                        ),
+                        dbc.ModalFooter(
+                            dbc.Button("Close", id="clada-code-modal-close", className="ml-auto")
+                        ),
+                    ],
+                    id="clada-code-modal",
+                    size="lg",
+                ),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},
+)
+
+adap_card = dbc.Card(
+    [
+        dbc.CardBody(
+            [
+                html.H4("Regression Dashboard", className="card-title"),
+                html.P(
+                    "Predicting the Close Price of ADA for last 30 Days"
+                    ,className="card-text",
+                ),
+                html.A(dbc.Button("Go to dashboard", color="primary"),
+                       href="/ada_regression"),
+                dbc.Button("Show Code", id="rgada-code-modal-open", className="mr-1"),
+                dbc.Modal(
+                    [
+                        dbc.ModalHeader("Code needed for this Regression Dashboard"),
+                        dcc.Markdown(
+"""
+"""
+                        ),
+                        dbc.ModalFooter(
+                            dbc.Button("Close", id="rgada-code-modal-close", className="ml-auto")
+                        ),
+                    ],
+                    id="rgada-code-modal",
+                    size="lg",
+                ),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},
+)
+
+bnbt_card = dbc.Card(
+    [
+
+        dbc.CardBody(
+            [
+                html.H4("Classifier Dashboard", className="card-title"),
+                html.P(
+                    "Predicting the Trend of BNB for last 30 Days"
+                    ,className="card-text",
+                ),
+                html.A(dbc.Button("Go to dashboard", color="primary"),
+                       href="/bnb_classifier"),
+                dbc.Button("Show Code", id="clbnb-code-modal-open", className="mr-1"),
+                dbc.Modal(
+                    [
+                        dbc.ModalHeader("Code needed for this Classifier Dashboard"),
+                        dcc.Markdown(
+"""
+"""
+                        ),
+                        dbc.ModalFooter(
+                            dbc.Button("Close", id="clbnb-code-modal-close", className="ml-auto")
+                        ),
+                    ],
+                    id="clbnb-code-modal",
+                    size="lg",
+                ),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},
+)
+
+bnbp_card = dbc.Card(
+    [
+        dbc.CardBody(
+            [
+                html.H4("Regression Dashboard", className="card-title"),
+                html.P(
+                    "Predicting the Close Price of BNB for last 30 Days"
+                    ,className="card-text",
+                ),
+                html.A(dbc.Button("Go to dashboard", color="primary"),
+                       href="/bnb_regression"),
+                dbc.Button("Show Code", id="rgbnb-code-modal-open", className="mr-1"),
+                dbc.Modal(
+                    [
+                        dbc.ModalHeader("Code needed for this Regression Dashboard"),
+                        dcc.Markdown(
+"""
+"""
+                        ),
+                        dbc.ModalFooter(
+                            dbc.Button("Close", id="rgbnb-code-modal-close", className="ml-auto")
+                        ),
+                    ],
+                    id="rgbnb-code-modal",
+                    size="lg",
+                ),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},
+)
+
+xrpt_card = dbc.Card(
+    [
+
+        dbc.CardBody(
+            [
+                html.H4("Classifier Dashboard", className="card-title"),
+                html.P(
+                    "Predicting the Trend of XRP for last 30 Days"
+                    ,className="card-text",
+                ),
+                html.A(dbc.Button("Go to dashboard", color="primary"),
+                       href="/xrp_classifier"),
+                dbc.Button("Show Code", id="clxrp-code-modal-open", className="mr-1"),
+                dbc.Modal(
+                    [
+                        dbc.ModalHeader("Code needed for this Classifier Dashboard"),
+                        dcc.Markdown(
+"""
+"""
+                        ),
+                        dbc.ModalFooter(
+                            dbc.Button("Close", id="clxrp-code-modal-close", className="ml-auto")
+                        ),
+                    ],
+                    id="clxrp-code-modal",
+                    size="lg",
+                ),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},
+)
+
+xrpp_card = dbc.Card(
+    [
+        dbc.CardBody(
+            [
+                html.H4("Regression Dashboard", className="card-title"),
+                html.P(
+                    "Predicting the Close Price of XRP for last 30 Days"
+                    ,className="card-text",
+                ),
+                html.A(dbc.Button("Go to dashboard", color="primary"),
+                       href="/xrp_regression"),
+                dbc.Button("Show Code", id="rgxrp-code-modal-open", className="mr-1"),
+                dbc.Modal(
+                    [
+                        dbc.ModalHeader("Code needed for this Regression Dashboard"),
+                        dcc.Markdown(
+"""
+"""
+                        ),
+                        dbc.ModalFooter(
+                            dbc.Button("Close", id="rgxrp-code-modal-close", className="ml-auto")
+                        ),
+                    ],
+                    id="rgxrp-code-modal",
+                    size="lg",
+                ),
+            ]
+        ),
+    ],
+    style={"width": "18rem"},
+)
+
+
+
+btc_cards = dbc.CardDeck([trend_card, price_card])
+eth_cards = dbc.CardDeck([etht_card, ethp_card])
+ada_cards = dbc.CardDeck([adat_card, adap_card])
+bnb_cards = dbc.CardDeck([bnbt_card, bnbp_card])
+xrp_cards = dbc.CardDeck([xrpt_card, xrpp_card])
+
+
 index_layout =  dbc.Container([
     navbar,     
     dbc.Row([
@@ -270,7 +473,55 @@ index_layout =  dbc.Container([
     
     dbc.Row([
         dbc.Col([
-            default_cards,
+            btc_cards,
+        ]),
+    ]),
+    
+    dbc.Row([
+        dbc.Col([
+            html.H3("Ethereum"),
+        ])
+    ]),
+    
+    dbc.Row([
+        dbc.Col([
+            eth_cards,
+        ]),
+    ]),
+    
+    dbc.Row([
+        dbc.Col([
+            html.H3("Cardano"),
+        ])
+    ]),
+    
+    dbc.Row([
+        dbc.Col([
+            ada_cards,
+        ]),
+    ]),
+    
+    dbc.Row([
+        dbc.Col([
+            html.H3("Binance Coin"),
+        ])
+    ]),
+    
+    dbc.Row([
+        dbc.Col([
+            bnb_cards,
+        ]),
+    ]),
+    
+    dbc.Row([
+        dbc.Col([
+            html.H3("XRP"),
+        ])
+    ]),
+    
+    dbc.Row([
+        dbc.Col([
+            xrp_cards,
         ]),
     ]),
 ])
@@ -314,6 +565,72 @@ def register_callbacks(app):
         Input("rgeth-code-modal-open", "n_clicks"), 
         Input("rgeth-code-modal-close", "n_clicks"),
         State("rgeth-code-modal", "is_open"),
+    )
+    def toggle_modal(click_open, click_close, is_open):
+        if click_open or click_close:
+            return not is_open
+        return is_open
+    
+    @app.callback(
+        Output("clada-code-modal", "is_open"),
+        Input("clada-code-modal-open", "n_clicks"), 
+        Input("clada-code-modal-close", "n_clicks"),
+        State("clada-code-modal", "is_open"),
+    )
+    def toggle_modal(click_open, click_close, is_open):
+        if click_open or click_close:
+            return not is_open
+        return is_open
+
+    @app.callback(
+        Output("rgada-code-modal", "is_open"),
+        Input("rgada-code-modal-open", "n_clicks"), 
+        Input("rgada-code-modal-close", "n_clicks"),
+        State("rgada-code-modal", "is_open"),
+    )
+    def toggle_modal(click_open, click_close, is_open):
+        if click_open or click_close:
+            return not is_open
+        return is_open
+    
+    @app.callback(
+        Output("clbnb-code-modal", "is_open"),
+        Input("clbnb-code-modal-open", "n_clicks"), 
+        Input("clbnb-code-modal-close", "n_clicks"),
+        State("clbnb-code-modal", "is_open"),
+    )
+    def toggle_modal(click_open, click_close, is_open):
+        if click_open or click_close:
+            return not is_open
+        return is_open
+
+    @app.callback(
+        Output("rgbnb-code-modal", "is_open"),
+        Input("rgbnb-code-modal-open", "n_clicks"), 
+        Input("rgbnb-code-modal-close", "n_clicks"),
+        State("rgbnb-code-modal", "is_open"),
+    )
+    def toggle_modal(click_open, click_close, is_open):
+        if click_open or click_close:
+            return not is_open
+        return is_open
+    
+    @app.callback(
+        Output("clxrp-code-modal", "is_open"),
+        Input("clxrp-code-modal-open", "n_clicks"), 
+        Input("clxrp-code-modal-close", "n_clicks"),
+        State("clxrp-code-modal", "is_open"),
+    )
+    def toggle_modal(click_open, click_close, is_open):
+        if click_open or click_close:
+            return not is_open
+        return is_open
+
+    @app.callback(
+        Output("rgxrp-code-modal", "is_open"),
+        Input("rgxrp-code-modal-open", "n_clicks"), 
+        Input("rgxrp-code-modal-close", "n_clicks"),
+        State("rgxrp-code-modal", "is_open"),
     )
     def toggle_modal(click_open, click_close, is_open):
         if click_open or click_close:
