@@ -34,7 +34,7 @@ navbar = dbc.NavbarSimple(
 
 trend_card = dbc.Card(
     [
-        dbc.CardImg(src="assets/trend.jpeg", top=True),
+        dbc.CardImg(src="assets/btc_trend.jpeg", top=True),
         dbc.CardBody(
             [
                 html.H4("Classifier Dashboard", className="card-title"),
@@ -111,7 +111,7 @@ explainer_c.dump(pkl_dir /"explainer_c.joblib")
 
 price_card = dbc.Card(
     [
-        dbc.CardImg(src="assets/price.jpeg", top=True),
+        dbc.CardImg(src="assets/btc_price.jpeg", top=True),
         dbc.CardBody(
             [
                 html.H4("Regression Dashboard", className="card-title"),
@@ -185,7 +185,7 @@ explainer_r.dump(pkl_dir /"explainer_r.joblib")
 
 etht_card = dbc.Card(
     [
-
+        dbc.CardImg(src="assets/eth_trend.jpeg", top=True)
         dbc.CardBody(
             [
                 html.H4("Classifier Dashboard", className="card-title"),
@@ -218,6 +218,7 @@ etht_card = dbc.Card(
 
 ethp_card = dbc.Card(
     [
+        dbc.CardImg(src="assets/eth_price.jpeg", top=True)
         dbc.CardBody(
             [
                 html.H4("Regression Dashboard", className="card-title"),
@@ -250,7 +251,7 @@ ethp_card = dbc.Card(
 
 adat_card = dbc.Card(
     [
-
+        dbc.CardImg(src="assets/ada_trend.jpeg", top=True)
         dbc.CardBody(
             [
                 html.H4("Classifier Dashboard", className="card-title"),
@@ -283,6 +284,7 @@ adat_card = dbc.Card(
 
 adap_card = dbc.Card(
     [
+        dbc.CardImg(src="assets/ada_price.jpeg", top=True)
         dbc.CardBody(
             [
                 html.H4("Regression Dashboard", className="card-title"),
@@ -315,7 +317,7 @@ adap_card = dbc.Card(
 
 bnbt_card = dbc.Card(
     [
-
+        dbc.CardImg(src="assets/bnb_trend.jpeg", top=True)
         dbc.CardBody(
             [
                 html.H4("Classifier Dashboard", className="card-title"),
@@ -348,6 +350,7 @@ bnbt_card = dbc.Card(
 
 bnbp_card = dbc.Card(
     [
+        dbc.CardImg(src="assets/bnb_trend.jpeg", top=True)
         dbc.CardBody(
             [
                 html.H4("Regression Dashboard", className="card-title"),
@@ -380,7 +383,7 @@ bnbp_card = dbc.Card(
 
 xrpt_card = dbc.Card(
     [
-
+        dbc.CardImg(src="assets/xrp_trend.jpeg", top=True)
         dbc.CardBody(
             [
                 html.H4("Classifier Dashboard", className="card-title"),
@@ -413,6 +416,7 @@ xrpt_card = dbc.Card(
 
 xrpp_card = dbc.Card(
     [
+        dbc.CardImg(src="assets/xrp_trend.jpeg", top=True)
         dbc.CardBody(
             [
                 html.H4("Regression Dashboard", className="card-title"),
