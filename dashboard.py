@@ -21,57 +21,57 @@ app = Flask(__name__)
 explainer_c = ClassifierExplainer.from_file(pkl_dir / "explainer_c.joblib")
 clas_dashboard = ExplainerDashboard(explainer_c, 
                     title="Classifier Explainer: Trend Prediction", 
-                    server=app, url_base_pathname="/classifier/", 
-                    header_hide_selector=True)
+                    server=app, url_base_pathname="/btc_classifier/", 
+                    header_hide_selector=False, whatif=False, shap_dependence=False)
 
 explainer_r = RegressionExplainer.from_file(pkl_dir / "explainer_r.joblib")
 reg_dashboard = ExplainerDashboard(explainer_r, 
                     title="Regression Explainer: Close Price Prediction",
-                    server=app, url_base_pathname="/regression/")
+                    server=app, url_base_pathname="/btc_regression/", whatif=False, shap_dependence=False)
 
 explainer_ceth = ClassifierExplainer.from_file(pkl_dir / "explainer_ceth.joblib")
 cleth_dashboard = ExplainerDashboard(explainer_ceth, 
                     title="Classifier Explainer: Trend Prediction", 
                     server=app, url_base_pathname="/eth_classifier/", 
-                    header_hide_selector=True)
+                    header_hide_selector=False, whatif=False, shap_dependence=False)
 
 explainer_reth = RegressionExplainer.from_file(pkl_dir / "explainer_reth.joblib")
 rgeth_dashboard = ExplainerDashboard(explainer_reth, 
                     title="Regression Explainer: Close Price Prediction",
-                    server=app, url_base_pathname="/eth_regression/")
+                    server=app, url_base_pathname="/eth_regression/", whatif=False, shap_dependence=False)
 
 explainer_cada = ClassifierExplainer.from_file(pkl_dir / "explainer_cada.joblib")
 clada_dashboard = ExplainerDashboard(explainer_cada, 
                     title="Classifier Explainer: Trend Prediction", 
                     server=app, url_base_pathname="/ada_classifier/", 
-                    header_hide_selector=True)
+                    header_hide_selector=False, whatif=False, shap_dependence=False)
 
 explainer_rada = RegressionExplainer.from_file(pkl_dir / "explainer_rada.joblib")
 rgada_dashboard = ExplainerDashboard(explainer_rada, 
                     title="Regression Explainer: Close Price Prediction",
-                    server=app, url_base_pathname="/ada_regression/")
+                    server=app, url_base_pathname="/ada_regression/", whatif=False, shap_dependence=False)
 
 explainer_cbnb = ClassifierExplainer.from_file(pkl_dir / "explainer_cbnb.joblib")
 clbnb_dashboard = ExplainerDashboard(explainer_cbnb, 
                     title="Classifier Explainer: Trend Prediction", 
                     server=app, url_base_pathname="/bnb_classifier/", 
-                    header_hide_selector=True)
+                    header_hide_selector=False, whatif=False, shap_dependence=False)
 
 explainer_rbnb = RegressionExplainer.from_file(pkl_dir / "explainer_rbnb.joblib")
 rgbnb_dashboard = ExplainerDashboard(explainer_rbnb, 
                     title="Regression Explainer: Close Price Prediction",
-                    server=app, url_base_pathname="/bnb_regression/")
+                    server=app, url_base_pathname="/bnb_regression/", whatif=False, shap_dependence=False)
 
 explainer_cxrp = ClassifierExplainer.from_file(pkl_dir / "explainer_cxrp.joblib")
 clxrp_dashboard = ExplainerDashboard(explainer_cxrp, 
                     title="Classifier Explainer: Trend Prediction", 
                     server=app, url_base_pathname="/xrp_classifier/", 
-                    header_hide_selector=True)
+                    header_hide_selector=False, whatif=False, shap_dependence=False)
 
 explainer_rxrp = RegressionExplainer.from_file(pkl_dir / "explainer_rxrp.joblib")
 rgxrp_dashboard = ExplainerDashboard(explainer_rxrp, 
                     title="Regression Explainer: Close Price Prediction",
-                    server=app, url_base_pathname="/xrp_regression/")
+                    server=app, url_base_pathname="/xrp_regression/", whatif=False, shap_dependence=False)
 
 
 index_app = dash.Dash(
@@ -80,7 +80,7 @@ index_app = dash.Dash(
     url_base_pathname="/", 
     external_stylesheets=[BOOTSTRAP])
 
-index_app.title = 'Bitcoin'
+index_app.title = 'Cryptocurrency Explainable-AI'
 index_app.layout = index_layout
 register_callbacks(index_app)
 
@@ -88,11 +88,11 @@ register_callbacks(index_app)
 def index():
     return index_app.index()
 
-@app.route('/classifier')
+@app.route('/btc_classifier')
 def classifier_dashboard():
     return clas_dashboard.app.index()
 
-@app.route('/regression')
+@app.route('/btc_regression')
 def regression_dashboard():
     return reg_dashboard.app.index()
   
