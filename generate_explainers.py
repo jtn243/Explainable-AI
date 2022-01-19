@@ -1,6 +1,5 @@
 import pandas as pd
 from pathlib import Path
-from imblearn.over_sampling import SMOTE
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import RandomForestRegressor
 from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
@@ -19,7 +18,7 @@ feature_descriptions={
         'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
         'Market Cap': "The total market value of a cryptocurrency's circulating supply",
         'Return' : 'Return on the Single Day',
-        'Cum_Return':'Cummulative Return',
+        'Cum_Return':'Cumulative Return',
         'Trend': 'Up or Down'}
 
 X = btc.drop(columns=['Trend','Return'], axis=1)
@@ -30,8 +29,6 @@ X_test= X.iloc[len(X)-30: , :]
 y_train = y.iloc[0:len(X)-30]
 y_test = y.iloc[len(X)-30:]
 
-oversample = SMOTE()
-X_train,y_train = oversample.fit_resample(X_train,y_train)
 
 rfc = RandomForestClassifier()
 rfc.fit(X_train,y_train)
