@@ -53,7 +53,6 @@ trend_card = dbc.Card(
 ```python
 import pandas as pd
 from pathlib import Path
-from imblearn.over_sampling import SMOTE
 from sklearn.ensemble import RandomForestRegressor
 from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
 
