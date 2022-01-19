@@ -85,7 +85,7 @@ rfc = RandomForestClassifier()
 rfc.fit(X_train,y_train)
 rfc_pred = rfc.predict(X_test)
 
-explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+explainer_c = ClassifierExplainer(rfc, X_test, y_test,descriptions=feature_descriptions , 
                                   target='Trend', labels=['Down','Up'])
 _ = ExplainerDashboard(explainer_c)
 explainer_c.dump(pkl_dir /"explainer_c.joblib")
@@ -232,7 +232,7 @@ rfc = RandomForestClassifier()
 rfc.fit(X_train,y_train)
 rfc_pred = rfc.predict(X_test)
 
-explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+explainer_c = ClassifierExplainer(rfc, X_test, y_test,descriptions=feature_descriptions , 
                                   target='Trend', labels=['Down','Up'])
 _ = ExplainerDashboard(explainer_c)
 explainer_c.dump(pkl_dir /"explainer_c.joblib")
@@ -379,7 +379,7 @@ rfc = RandomForestClassifier()
 rfc.fit(X_train,y_train)
 rfc_pred = rfc.predict(X_test)
 
-explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+explainer_c = ClassifierExplainer(rfc, X_test, y_test, descriptions=feature_descriptions , 
                                   target='Trend', labels=['Down','Up'])
 _ = ExplainerDashboard(explainer_c)
 explainer_c.dump(pkl_dir /"explainer_c.joblib")
@@ -526,7 +526,7 @@ rfc = RandomForestClassifier()
 rfc.fit(X_train,y_train)
 rfc_pred = rfc.predict(X_test)
 
-explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+explainer_c = ClassifierExplainer(rfc, X_test, y_test, descriptions=feature_descriptions , 
                                   target='Trend', labels=['Down','Up'])
 _ = ExplainerDashboard(explainer_c)
 explainer_c.dump(pkl_dir /"explainer_c.joblib")
@@ -673,7 +673,7 @@ rfc = RandomForestClassifier()
 rfc.fit(X_train,y_train)
 rfc_pred = rfc.predict(X_test)
 
-explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+explainer_c = ClassifierExplainer(rfc, X_test, y_test,descriptions=feature_descriptions , 
                                   target='Trend', labels=['Down','Up'])
 _ = ExplainerDashboard(explainer_c)
 explainer_c.dump(pkl_dir /"explainer_c.joblib")
