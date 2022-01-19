@@ -70,7 +70,7 @@ feature_descriptions={
         'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
         'Market Cap': "The total market value of a cryptocurrency's circulating supply",
         'Return' : 'Return on the Single Day',
-        'Cum_Return':'Cummulative Return',
+        'Cum_Return':'Cumulative Return',
         'Trend': 'Up or Down'}
 
 X = btc.drop(columns=['Trend','Return'], axis=1)
@@ -80,9 +80,6 @@ X_train = X.iloc[0:len(X)-30, :]
 X_test= X.iloc[len(X)-30: , :]
 y_train = y.iloc[0:len(X)-30]
 y_test = y.iloc[len(X)-30:]
-
-oversample = SMOTE()
-X_train,y_train = oversample.fit_resample(X_train,y_train)
 
 rfc = RandomForestClassifier()
 rfc.fit(X_train,y_train)
@@ -146,7 +143,7 @@ feature_descriptions={
         'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
         'Market Cap': "The total market value of a cryptocurrency's circulating supply",
         'Return' : 'Return on the Single Day',
-        'Cum_Return':'Cummulative Return',
+        'Cum_Return':'Cumulative Return',
         'Trend': 'Up or Down'}
 
 Xr = btc.drop(columns=['Trend','Close','Cum_Return'], axis=1)
@@ -200,6 +197,46 @@ etht_card = dbc.Card(
                         dbc.ModalHeader("Code needed for this Classifier Dashboard"),
                         dcc.Markdown(
 """
+```python
+import pandas as pd
+from pathlib import Path
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
+
+pkl_dir = Path.cwd() / "pkls"
+data_dir= Path.cwd() / "data"
+
+eth = pd.read_csv(data_dir /'ETH_pro.csv', index_col=0)
+
+feature_descriptions={
+        'Open': 'Opening Price',
+        'Close': 'Closing Price',
+        'Low': 'Lowest Price',
+        'High': 'Highest Price',
+        'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
+        'Market Cap': "The total market value of a cryptocurrency's circulating supply",
+        'Return' : 'Return on the Single Day',
+        'Cum_Return':'Cumulative Return',
+        'Trend': 'Up or Down'}
+
+X = eth.drop(columns=['Trend','Return'], axis=1)
+y = eth['Trend']
+
+X_train = X.iloc[0:len(X)-30, :]
+X_test= X.iloc[len(X)-30: , :]
+y_train = y.iloc[0:len(X)-30]
+y_test = y.iloc[len(X)-30:]
+
+rfc = RandomForestClassifier()
+rfc.fit(X_train,y_train)
+rfc_pred = rfc.predict(X_test)
+
+explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+                                  target='Trend', labels=['Down','Up'])
+_ = ExplainerDashboard(explainer_c)
+explainer_c.dump(pkl_dir /"explainer_c.joblib")
+```
 """
                         ),
                         dbc.ModalFooter(
@@ -233,6 +270,47 @@ ethp_card = dbc.Card(
                         dbc.ModalHeader("Code needed for this Regression Dashboard"),
                         dcc.Markdown(
 """
+```python
+import pandas as pd
+from pathlib import Path
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
+
+pkl_dir = Path.cwd() / "pkls"
+data_dir= Path.cwd() / "data"
+
+eth = pd.read_csv(data_dir /'ETH_pro.csv', index_col=0)
+
+feature_descriptions={
+        'Open': 'Opening Price',
+        'Close': 'Closing Price',
+        'Low': 'Lowest Price',
+        'High': 'Highest Price',
+        'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
+        'Market Cap': "The total market value of a cryptocurrency's circulating supply",
+        'Return' : 'Return on the Single Day',
+        'Cum_Return':'Cumulative Return',
+        'Trend': 'Up or Down'}
+
+Xr = eth.drop(columns=['Trend','Close','Cum_Return'], axis=1)
+yr = eth['Close']
+
+Xr_train = Xr.iloc[0:len(X)-30, :]
+Xr_test= Xr.iloc[len(X)-30: , :]
+yr_train = yr.iloc[0:len(X)-30]
+yr_test = yr.iloc[len(X)-30:]
+
+rfr = RandomForestRegressor()
+rfr.fit(Xr_train,yr_train)
+rfr_pred = rfr.predict(Xr_test)
+
+explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,descriptions=feature_descriptions , 
+                                  target='Close',units='$')
+
+_ = ExplainerDashboard(explainer_r)
+explainer_r.dump(pkl_dir /"explainer_r.joblib")
+```
 """
                         ),
                         dbc.ModalFooter(
@@ -266,6 +344,46 @@ adat_card = dbc.Card(
                         dbc.ModalHeader("Code needed for this Classifier Dashboard"),
                         dcc.Markdown(
 """
+```python
+import pandas as pd
+from pathlib import Path
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
+
+pkl_dir = Path.cwd() / "pkls"
+data_dir= Path.cwd() / "data"
+
+ada = pd.read_csv(data_dir /'ADA_pro.csv', index_col=0)
+
+feature_descriptions={
+        'Open': 'Opening Price',
+        'Close': 'Closing Price',
+        'Low': 'Lowest Price',
+        'High': 'Highest Price',
+        'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
+        'Market Cap': "The total market value of a cryptocurrency's circulating supply",
+        'Return' : 'Return on the Single Day',
+        'Cum_Return':'Cumulative Return',
+        'Trend': 'Up or Down'}
+
+X = ada.drop(columns=['Trend','Return'], axis=1)
+y = ada['Trend']
+
+X_train = X.iloc[0:len(X)-30, :]
+X_test= X.iloc[len(X)-30: , :]
+y_train = y.iloc[0:len(X)-30]
+y_test = y.iloc[len(X)-30:]
+
+rfc = RandomForestClassifier()
+rfc.fit(X_train,y_train)
+rfc_pred = rfc.predict(X_test)
+
+explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+                                  target='Trend', labels=['Down','Up'])
+_ = ExplainerDashboard(explainer_c)
+explainer_c.dump(pkl_dir /"explainer_c.joblib")
+```
 """
                         ),
                         dbc.ModalFooter(
@@ -299,6 +417,47 @@ adap_card = dbc.Card(
                         dbc.ModalHeader("Code needed for this Regression Dashboard"),
                         dcc.Markdown(
 """
+```python
+import pandas as pd
+from pathlib import Path
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
+
+pkl_dir = Path.cwd() / "pkls"
+data_dir= Path.cwd() / "data"
+
+ada = pd.read_csv(data_dir /'ADA_pro.csv', index_col=0)
+
+feature_descriptions={
+        'Open': 'Opening Price',
+        'Close': 'Closing Price',
+        'Low': 'Lowest Price',
+        'High': 'Highest Price',
+        'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
+        'Market Cap': "The total market value of a cryptocurrency's circulating supply",
+        'Return' : 'Return on the Single Day',
+        'Cum_Return':'Cumulative Return',
+        'Trend': 'Up or Down'}
+
+Xr = ada.drop(columns=['Trend','Close','Cum_Return'], axis=1)
+yr = ada['Close']
+
+Xr_train = Xr.iloc[0:len(X)-30, :]
+Xr_test= Xr.iloc[len(X)-30: , :]
+yr_train = yr.iloc[0:len(X)-30]
+yr_test = yr.iloc[len(X)-30:]
+
+rfr = RandomForestRegressor()
+rfr.fit(Xr_train,yr_train)
+rfr_pred = rfr.predict(Xr_test)
+
+explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,descriptions=feature_descriptions , 
+                                  target='Close',units='$')
+
+_ = ExplainerDashboard(explainer_r)
+explainer_r.dump(pkl_dir /"explainer_r.joblib")
+```
 """
                         ),
                         dbc.ModalFooter(
@@ -332,6 +491,46 @@ bnbt_card = dbc.Card(
                         dbc.ModalHeader("Code needed for this Classifier Dashboard"),
                         dcc.Markdown(
 """
+```python
+import pandas as pd
+from pathlib import Path
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
+
+pkl_dir = Path.cwd() / "pkls"
+data_dir= Path.cwd() / "data"
+
+bnb = pd.read_csv(data_dir /'BNB_pro.csv', index_col=0)
+
+feature_descriptions={
+        'Open': 'Opening Price',
+        'Close': 'Closing Price',
+        'Low': 'Lowest Price',
+        'High': 'Highest Price',
+        'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
+        'Market Cap': "The total market value of a cryptocurrency's circulating supply",
+        'Return' : 'Return on the Single Day',
+        'Cum_Return':'Cumulative Return',
+        'Trend': 'Up or Down'}
+
+X = bnb.drop(columns=['Trend','Return'], axis=1)
+y = bnb['Trend']
+
+X_train = X.iloc[0:len(X)-30, :]
+X_test= X.iloc[len(X)-30: , :]
+y_train = y.iloc[0:len(X)-30]
+y_test = y.iloc[len(X)-30:]
+
+rfc = RandomForestClassifier()
+rfc.fit(X_train,y_train)
+rfc_pred = rfc.predict(X_test)
+
+explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+                                  target='Trend', labels=['Down','Up'])
+_ = ExplainerDashboard(explainer_c)
+explainer_c.dump(pkl_dir /"explainer_c.joblib")
+```
 """
                         ),
                         dbc.ModalFooter(
@@ -365,6 +564,47 @@ bnbp_card = dbc.Card(
                         dbc.ModalHeader("Code needed for this Regression Dashboard"),
                         dcc.Markdown(
 """
+```python
+import pandas as pd
+from pathlib import Path
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
+
+pkl_dir = Path.cwd() / "pkls"
+data_dir= Path.cwd() / "data"
+
+bnb = pd.read_csv(data_dir /'BNB_pro.csv', index_col=0)
+
+feature_descriptions={
+        'Open': 'Opening Price',
+        'Close': 'Closing Price',
+        'Low': 'Lowest Price',
+        'High': 'Highest Price',
+        'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
+        'Market Cap': "The total market value of a cryptocurrency's circulating supply",
+        'Return' : 'Return on the Single Day',
+        'Cum_Return':'Cumulative Return',
+        'Trend': 'Up or Down'}
+
+Xr = bnb.drop(columns=['Trend','Close','Cum_Return','Market Cap'], axis=1)
+yr = bnb['Close']
+
+Xr_train = Xr.iloc[0:len(X)-30, :]
+Xr_test= Xr.iloc[len(X)-30: , :]
+yr_train = yr.iloc[0:len(X)-30]
+yr_test = yr.iloc[len(X)-30:]
+
+rfr = RandomForestRegressor()
+rfr.fit(Xr_train,yr_train)
+rfr_pred = rfr.predict(Xr_test)
+
+explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,descriptions=feature_descriptions , 
+                                  target='Close',units='$')
+
+_ = ExplainerDashboard(explainer_r)
+explainer_r.dump(pkl_dir /"explainer_r.joblib")
+```
 """
                         ),
                         dbc.ModalFooter(
@@ -398,6 +638,46 @@ xrpt_card = dbc.Card(
                         dbc.ModalHeader("Code needed for this Classifier Dashboard"),
                         dcc.Markdown(
 """
+```python
+import pandas as pd
+from pathlib import Path
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
+
+pkl_dir = Path.cwd() / "pkls"
+data_dir= Path.cwd() / "data"
+
+xrp = pd.read_csv(data_dir /'XRP_pro.csv', index_col=0)
+
+feature_descriptions={
+        'Open': 'Opening Price',
+        'Close': 'Closing Price',
+        'Low': 'Lowest Price',
+        'High': 'Highest Price',
+        'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
+        'Market Cap': "The total market value of a cryptocurrency's circulating supply",
+        'Return' : 'Return on the Single Day',
+        'Cum_Return':'Cumulative Return',
+        'Trend': 'Up or Down'}
+
+X = xrp.drop(columns=['Trend','Return'], axis=1)
+y = xrp['Trend']
+
+X_train = X.iloc[0:len(X)-30, :]
+X_test= X.iloc[len(X)-30: , :]
+y_train = y.iloc[0:len(X)-30]
+y_test = y.iloc[len(X)-30:]
+
+rfc = RandomForestClassifier()
+rfc.fit(X_train,y_train)
+rfc_pred = rfc.predict(X_test)
+
+explainer_c = ClassifierExplainer(rfc, X_test, y_test, X_background=X_train,descriptions=feature_descriptions , 
+                                  target='Trend', labels=['Down','Up'])
+_ = ExplainerDashboard(explainer_c)
+explainer_c.dump(pkl_dir /"explainer_c.joblib")
+```
 """
                         ),
                         dbc.ModalFooter(
@@ -431,6 +711,47 @@ xrpp_card = dbc.Card(
                         dbc.ModalHeader("Code needed for this Regression Dashboard"),
                         dcc.Markdown(
 """
+```python
+import pandas as pd
+from pathlib import Path
+from sklearn.ensemble import RandomForestRegressor
+from explainerdashboard import ClassifierExplainer, RegressionExplainer, ExplainerDashboard
+
+
+pkl_dir = Path.cwd() / "pkls"
+data_dir= Path.cwd() / "data"
+
+xrp = pd.read_csv(data_dir /'XRP_pro.csv', index_col=0)
+
+feature_descriptions={
+        'Open': 'Opening Price',
+        'Close': 'Closing Price',
+        'Low': 'Lowest Price',
+        'High': 'Highest Price',
+        'Volume': 'A measure of how much of a cryptocurrency was traded in the last 24 hours',
+        'Market Cap': "The total market value of a cryptocurrency's circulating supply",
+        'Return' : 'Return on the Single Day',
+        'Cum_Return':'Cumulative Return',
+        'Trend': 'Up or Down'}
+
+Xr = xrp.drop(columns=['Trend','Close','Cum_Return'], axis=1)
+yr = xrp['Close']
+
+Xr_train = Xr.iloc[0:len(X)-30, :]
+Xr_test= Xr.iloc[len(X)-30: , :]
+yr_train = yr.iloc[0:len(X)-30]
+yr_test = yr.iloc[len(X)-30:]
+
+rfr = RandomForestRegressor()
+rfr.fit(Xr_train,yr_train)
+rfr_pred = rfr.predict(Xr_test)
+
+explainer_r = RegressionExplainer(rfr, Xr_test, yr_test, X_background=Xr_train ,descriptions=feature_descriptions , 
+                                  target='Close',units='$')
+
+_ = ExplainerDashboard(explainer_r)
+explainer_r.dump(pkl_dir /"explainer_r.joblib")
+```
 """
                         ),
                         dbc.ModalFooter(
