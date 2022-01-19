@@ -43,7 +43,7 @@ trend_card = dbc.Card(
                     ,className="card-text",
                 ),
                 html.A(dbc.Button("Go to dashboard", color="primary"),
-                       href="/classifier"),
+                       href="/btc_classifier"),
                 dbc.Button("Show Code", id="clas-code-modal-open", className="mr-1"),
                 dbc.Modal(
                     [
@@ -116,7 +116,7 @@ price_card = dbc.Card(
                     ,className="card-text",
                 ),
                 html.A(dbc.Button("Go to dashboard", color="primary"),
-                       href="/regression"),
+                       href="/btc_regression"),
                 dbc.Button("Show Code", id="reg-code-modal-open", className="mr-1"),
                 dbc.Modal(
                     [
